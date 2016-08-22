@@ -106,6 +106,7 @@
     
         // Set the image upload URL.
         imageUploadURL: 'php/upload_image.php',
+        
 
         // Additional upload params.
         imageUploadParams: {id: 'my_editor'}
@@ -122,6 +123,28 @@
       })
       .on('froalaEditor.image.replaced', function (e, editor, $img, response) {
         // Image was replaced in the editor.
+      })
+       // Catch image removal from the editor.
+      // Catch image remove
+      .on('froalaEditor.image.removed', function (e, editor, $img) {
+        $.ajax({
+          // Request method.
+          method: "POST",
+
+          // Request URL.
+          url: "http://localhost/froala_editor/php/delete_image.php",
+
+          // Request params.
+          data: {
+            src: $img.attr('src')
+          }
+        })
+        .done (function (data) {
+          console.log ('image was deleted');
+        })
+        .fail (function () {
+          console.log ('image delete problem');
+        })
       })
       .on('froalaEditor.image.error', function (e, editor, error, response) {
         alert("not working");

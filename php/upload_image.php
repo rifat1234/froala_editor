@@ -27,16 +27,16 @@
         // Save file in the uploads folder.
         move_uploaded_file($_FILES["file"]["tmp_name"], getcwd() . "/uploads/" . $name);
         // Generate response.
-        $myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
-$txt = getcwd() . "/uploads/" . $name;
-fwrite($myfile, $txt);
+        //$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+//$txt = getcwd() . "/uploads/" . $name;
+//fwrite($myfile, $txt);
 
 
         $response = new StdClass;
         $response->link = "http://localhost/froala_editor/php/uploads/" . $name;
-        $txt=$response->link;
-        fwrite($myfile,$txt);
-        fclose($myfile);
+        //$txt=$response->link;
+        //fwrite($myfile,$txt);
+        //fclose($myfile);
         echo stripslashes(json_encode($response));
     }
 ?>
